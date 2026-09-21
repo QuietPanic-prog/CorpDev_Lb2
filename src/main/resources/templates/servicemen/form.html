@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageTitle}">Военнослужащий</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="container narrow">
+    <a class="back-link" th:href="@{/servicemen}">← К списку</a>
+    <header class="form-heading">
+        <p class="eyebrow">Личная карточка</p>
+        <h1 th:text="${pageTitle}">Военнослужащий</h1>
+        <p class="subtitle">Заполните все поля формы.</p>
+    </header>
+
+    <form class="card form-card" th:object="${serviceman}"
+          th:action="${serviceman.id == null} ? @{/servicemen} : @{/servicemen/{id}(id=${serviceman.id})}"
+          method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-grid">
+            <label>
+                <span>Фамилия</span>
+                <input type="text" th:field="*{lastName}" maxlength="80" required autofocus>
+            </label>
+            <label>
+                <span>Имя</span>
+                <input type="text" th:field="*{firstName}" maxlength="80" required>
+            </label>
+            <label>
+                <span>Отчество</span>
+                <input type="text" th:field="*{patronymic}" maxlength="80" required>
+            </label>
+            <label>
+                <span>Национальность</span>
+                <input type="text" th:field="*{nationality}" maxlength="80" required>
+            </label>
+            <label>
+                <span>Дата рождения</span>
+                <input type="date" th:field="*{birthDate}" required>
+            </label>
+            <label>
+                <span>Должность</span>
+                <input type="text" th:field="*{position}" maxlength="120" required>
+            </label>
+            <label class="full-width">
+                <span>Звание</span>
+                <input type="text" th:field="*{rank}" maxlength="80" required>
+            </label>
+        </div>
+        <div class="form-actions">
+            <a class="button button-secondary" th:href="@{/servicemen}">Отмена</a>
+            <button class="button button-primary" type="submit">Сохранить</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

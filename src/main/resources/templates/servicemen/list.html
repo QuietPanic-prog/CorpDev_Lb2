@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Военнослужащие</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="container">
+    <header class="page-header">
+        <div>
+            <h1>Военнослужащие</h1>
+            <p class="subtitle">Учёт личного состава воинского подразделения</p>
+        </div>
+        <a class="button button-primary" th:href="@{/servicemen/new}">Добавить</a>
+    </header>
+
+    <div class="alert success" th:if="${successMessage}" th:text="${successMessage}"></div>
+    <div class="alert error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+    <section class="card table-card">
+        <div class="empty-state" th:if="${#lists.isEmpty(servicemen)}">
+            <h2>Список пока пуст</h2>
+            <p>Добавьте первую запись о военнослужащем.</p>
+        </div>
+
+        <div class="table-wrap" th:unless="${#lists.isEmpty(servicemen)}">
+            <table>
+                <thead>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Национальность</th>
+                    <th>Дата рождения</th>
+                    <th>Должность</th>
+                    <th>Звание</th>
+                    <th class="actions-column">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="serviceman : ${servicemen}">
+                    <td>
+                        <a class="name-link" th:href="@{/servicemen/{id}(id=${serviceman.id})}"
+                           th:text="|${serviceman.lastName} ${serviceman.firstName} ${serviceman.patronymic}|">ФИО</a>
+                    </td>
+                    <td th:text="${serviceman.nationality}">Национальность</td>
+                    <td th:text="${#temporals.format(serviceman.birthDate, 'dd.MM.yyyy')}">01.01.2000</td>
+                    <td th:text="${serviceman.position}">Должность</td>
+                    <td><span class="rank" th:text="${serviceman.rank}">Звание</span></td>
+                    <td>
+                        <div class="actions">
+                            <a class="button button-secondary button-small"
+                               th:href="@{/servicemen/{id}/edit(id=${serviceman.id})}">Изменить</a>
+                            <form th:action="@{/servicemen/{id}/delete(id=${serviceman.id})}" method="post"
+                                  onsubmit="return confirm('Удалить эту запись?')">
+                                <button class="button button-danger button-small" type="submit">Удалить</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

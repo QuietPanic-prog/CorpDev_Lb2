@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Карточка военнослужащего</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="container narrow">
+    <a class="back-link" th:href="@{/servicemen}">← К списку</a>
+
+    <section class="card profile-card">
+        <div class="profile-top">
+            <div class="avatar" th:text="|${#strings.substring(serviceman.lastName, 0, 1)}${#strings.substring(serviceman.firstName, 0, 1)}|">ИИ</div>
+            <div>
+                <p class="eyebrow">Личная карточка · ID <span th:text="${serviceman.id}">1</span></p>
+                <h1 th:text="|${serviceman.lastName} ${serviceman.firstName} ${serviceman.patronymic}|">ФИО</h1>
+                <span class="rank" th:text="${serviceman.rank}">Звание</span>
+            </div>
+        </div>
+
+        <dl class="details-grid">
+            <div><dt>Национальность</dt><dd th:text="${serviceman.nationality}">Национальность</dd></div>
+            <div><dt>Дата рождения</dt><dd th:text="${#temporals.format(serviceman.birthDate, 'dd.MM.yyyy')}">01.01.2000</dd></div>
+            <div class="full-width"><dt>Должность</dt><dd th:text="${serviceman.position}">Должность</dd></div>
+        </dl>
+
+        <div class="form-actions">
+            <form th:action="@{/servicemen/{id}/delete(id=${serviceman.id})}" method="post"
+                  onsubmit="return confirm('Удалить эту запись?')">
+                <button class="button button-danger" type="submit">Удалить</button>
+            </form>
+            <a class="button button-primary" th:href="@{/servicemen/{id}/edit(id=${serviceman.id})}">Изменить</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
