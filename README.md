@@ -90,3 +90,15 @@
 ```powershell
 .\mvnw.cmd test
 ```
+## Скриншоты
+<img width="1218" height="474" alt="image" src="https://github.com/user-attachments/assets/b2c1693c-3f18-40e6-a9ca-f440bbfe27dc" />
+Таблица с данными.
+
+<img width="798" height="710" alt="image" src="https://github.com/user-attachments/assets/acb7b0ee-6a64-4c65-9b84-d0b7b57ec0df" />
+Форма добавления новых данных.
+
+<img width="799" height="762" alt="image" src="https://github.com/user-attachments/assets/c113bf84-25f2-478b-b150-ff00331a405e" />
+Редактирование данных.
+
+<img width="799" height="515" alt="image" src="https://github.com/user-attachments/assets/5f34e2de-da65-45f0-8ed1-e190742f35a7" />
+Личная карточка.
